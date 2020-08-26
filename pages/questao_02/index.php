@@ -9,7 +9,7 @@
  *
  * @author Vinícius Barros minumex8@gmail.com
  */
-function gerarNumerosMegasena(int $iMin = 1, int $iMax = 60): array {
+function gerarIntervaloDeNumeros(int $iMin = 1, int $iMax = 60): array {
 	return range($iMin, $iMax);
 }
 
@@ -19,15 +19,15 @@ function gerarNumerosMegasena(int $iMin = 1, int $iMax = 60): array {
  *
  * @param int $iMin
  * @param int $iMax
- * @param int $iQuantity
+ * @param int $iQuantidade
  * @return array
  *
  * @author Vinícius Barros minumex8@gmail.com
  */
-function gerarNumerosPremiados(int $iMin = 1, int $iMax = 60, int $iQuantity = 6): array {
+function gerarNumerosPremiados(int $iMin = 1, int $iMax = 60, int $iQuantidade = 6): array {
 	$aNumerosGerado = [];
 
-	while (count($aNumerosGerado) < $iQuantity) {
+	while (count($aNumerosGerado) < $iQuantidade) {
 		$iNumeroGerado = mt_rand($iMin, $iMax);
 		$aNumerosGerado[$iNumeroGerado] = $iNumeroGerado;
 	}
@@ -38,15 +38,15 @@ function gerarNumerosPremiados(int $iMin = 1, int $iMax = 60, int $iQuantity = 6
 }
 
 /**
- * Função responsável por transformar o array com os números premiados em uma string
+ * Função responsável por transformar um array em uma string
  *
- * @param array $aNumeros
+ * @param array $aArray
  * @return string
  *
  * @author Vinícius Barros minumex8@gmail.com
  */
-function exibirNumerosPremiados(array $aNumeros): string {
-	return implode(' - ', $aNumeros);
+function formatarArrayParaString(array $aArray): string {
+	return implode(' - ', $aArray);
 }
 
 /**
@@ -61,17 +61,18 @@ function obterQuantidadeDeApostas(int $iQuantidade = 3): int {
 	return $iQuantidade;
 }
 
+$iQuantidadeDeApostas = obterQuantidadeDeApostas();
 ?>
 
 <div class="container pt-5">
 	<div class="row">
 		<div class="col-8 offset-2">
-			<?php for ($i = 0; $i < obterQuantidadeDeApostas(); $i++) {
+			<?php for ($i = 0; $i < $iQuantidadeDeApostas; $i++) {
 				$aNumerosSorteados = gerarNumerosPremiados();
 			?>
 				<table class="table table-striped">
 					<caption class="bg-primary text-white font-weight-bold pl-3">
-						Números Sorteados: <?= exibirNumerosPremiados($aNumerosSorteados); ?>
+						Números Sorteados: <?= formatarArrayParaString($aNumerosSorteados); ?>
 					</caption>
 					<thead>
 					<tr>
@@ -80,8 +81,7 @@ function obterQuantidadeDeApostas(int $iQuantidade = 3): int {
 					</thead>
 					<tbody>
 					<?php
-						$aNumeros = gerarNumerosMegasena();
-
+						$aNumeros = gerarIntervaloDeNumeros();
 						foreach ($aNumeros as $iNumero) {
 							if ($iNumero % 10 == 1) {
 								echo "<tr>";
