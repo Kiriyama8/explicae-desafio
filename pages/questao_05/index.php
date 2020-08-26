@@ -18,8 +18,8 @@ function obterUsuario(): object {
 }
 
 /**
- * Método responsável por formatar uma data, cria o objeto do tipo DateTimeImmutable
- * com o primeiro parâmetro, e em seguida formata a data no modelo informado.
+ * Método responsável por formatar uma data, recebe uma string de data como primeiro parâmetro,
+ * e em seguida formata a data no modelo informado.
  *
  * @param string $sData
  * @param string $sFormato
